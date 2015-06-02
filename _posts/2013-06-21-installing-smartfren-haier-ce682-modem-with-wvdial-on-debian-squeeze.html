@@ -1,0 +1,34 @@
+---
+title: "Installing smartfren Haier ce682 Modem with wvdial on Debian Squeeze"
+category: "softwares"
+tags: ["installation","networking"]
+language: "en"
+---
+
+<p>In this article, before you can begin to use the modem Haier CE682 smartfren on Linux Debian Squeeze we need wvdial, a software that we can install with <strong>apt-get intall</strong> command. In order to get a newer version, we have to update our sostware repository using <strong>apt-get update</strong>, and do not forget to use sudo if not as user root:</p>
+<script src="https://gist.github.com/paymycoffee/5829747.js"></script>
+<!--more-->
+<p>And now we install wvdial:</p>
+<script src="https://gist.github.com/paymycoffee/5832330.js"></script>
+<p>After completing of the preprocessing above, please plugged inn your smartfren Haier CE682nya to usb slot, then use the <strong>dmesg</strong> command, to see the results of the detection of the Linux Debian Squeeze.</p>
+<script src="https://gist.github.com/paymycoffee/5832583.js"></script>
+<p>And find similar message output look like this:</p>
+<pre style="background:#000;color:#fff;">
+sr1: scsi-1 drive
+</pre>
+<p>sr1, is like a drive such as A: B: C: etc, and is the first detection of as a CD-ROM and scsi-1 in this device. But what you need to note is sr1, because it can change from SR0, SR2, SR3 and so on. Once we know the sr? we can eject your drives with the <strong>eject</strong> command:</p>
+<script src="https://gist.github.com/paymycoffee/5832697.js"></script>
+<p>Do not worry if it is not got any message output when we eject The CD-ROM, for that reason we see the results eject command with <strong>dmesg</strong> command again:</p>
+<script src="https://gist.github.com/paymycoffee/5832779.js"></script>
+<p>And now it has turned into a flash memory card, if you already attach a SD card on it, you can found your file in this drive. This is just for your information only, what do we really need is a code of vendor and its product, which we will need to connect our Linux Debian Squeeze with our modem. And to get the vendor and its product code we can give a command to the Debian with <strong>lsusb</strong> command :</p>
+<script src="https://gist.github.com/paymycoffee/5832849.js"></script>
+<p>From the above output to look for hardware that do not have name such as <em>Textech International Ltd. Mini Optical Mouse</em> and <em>Linux Foundation 1.1 root hub</em>. But if you find more than the hardware without a name, try to unplug other usb device first, to make sure it your modem hardware code.</p>
+<p>Once it is certain that <strong>Bus 002 Device 005: ID 201e:1022</strong> as one and the only that does not have the hardware name, please note or simply keep in mind that this code section <strong>201e:1022</strong>. 201e is <strong>vendor</strong>code, and 1022 is <strong>product</strong> code.</p>
+<p>The information we obtain enough already, now our smartfren Haier CE682 can connect with Linux Debian Squeeze as a usb-serial device with <strong>modprobe</strong> command.</p>
+<script src="https://gist.github.com/paymycoffee/5832944.js"></script>
+<p>If there is no error message, we can proceed with the <strong>wvdialconf</strong> command to detect the presence of our modem in the system, and create a basic configuration for the modem:</p>
+<script src="https://gist.github.com/paymycoffee/5833011.js"></script>
+<p>If there were no problems, then a configuration file with path <strong>/etc/wvdial.conf</strong> will be made, or if it already there it will be updated. Then we can begin to connect to the internet with <strong>wvdial</strong> command :</p>
+<script src="https://gist.github.com/paymycoffee/5833609.js"></script>
+<p>If you do not use a desktop manager like KDE or Gnome a.k.a. Text Based console, you can use ALT + F2 or F3, F4 etc ... to move to another console, login and use the Links, Lynk, w3m etc ... for browsing.</p>
+<p>Thanks for reading, i am sorry my english are bad :)</p>

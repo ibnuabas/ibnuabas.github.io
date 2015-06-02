@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <title>{{ page.title }} | {{ site.author }}</title>
+  <link rel="stylesheet" href="/assets/css/normalize.min.css" type="text/css" />
+  <link rel="stylesheet" href="/assets/css/grid.css" type="text/css" />
+  <link rel="stylesheet" href="/assets/css/style.css" type="text/css" />
+ </head>
+ <body>
+  <div class="container">
+   <div class="row">
+    <div class="col content">
+     <div class="row posts">
+      <h1>{{ page.title }}</h1>
+      {{ content }}
+     </div>
+     <div class="row">
+{% if page.previous != nil %}
+      <div class="col info posts">
+       <a href="{{ page.previous.url }}">{{ page.previous.title }}</a>
+      </div>
+{% endif %}
+{% if page.next != nil %}
+      <div class="col info posts">
+       <a href="{{ page.next.url }}">{{ page.next.title }}</a>
+      </div>
+{% endif %}
+     </div>
+    </div>
+    <div class="col sidebar">
+     {% include sidebar.html %}
+    </div>
+   </div>
+  </div>
+  <div class="row col footer center">
+   <p class="stats"><code>Last Update : {{ site.time }}</code></p>
+  </div>
+{% include menu.html %}
+ </body>
+</html>
